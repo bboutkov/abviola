@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anton Boutkov - Classical Violist</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Crimson+Text:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Crimson Text', serif;
+            background: #faf8f5;
+            color: #2c2c2c;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 25px 50px;
+            background: rgba(250, 248, 245, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(139, 69, 19, 0.1);
+        }
+
+        nav.scrolled {
+            padding: 20px 50px;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 600;
+            color: #8b4513;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+        }
+
+        .nav-links a {
+            color: #2c2c2c;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            position: relative;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links a:hover {
+            color: #8b4513;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -8px;
+            left: 50%;
+            background: #8b4513;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: linear-gradient(135deg, #faf8f5 0%, #f5f2ec 100%);
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(139, 69, 19, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(160, 82, 45, 0.05) 0%, transparent 50%);
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            max-width: 800px;
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            font-weight: 700;
+            color: #2c2c2c;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .hero .subtitle {
+            font-size: 1.4rem;
+            color: #8b4513;
+            margin-bottom: 15px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 50px;
+            color: #5a5a5a;
+            font-style: italic;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 16px 35px;
+            border: 2px solid #8b4513;
+            border-radius: 0;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-decoration: none;
+            display: inline-block;
+            font-family: 'Crimson Text', serif;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: #8b4513;
+            color: #faf8f5;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #8b4513;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(139, 69, 19, 0.2);
+        }
+
+        .btn-primary:hover {
+            background: #6d3410;
+        }
+
+        .btn-secondary:hover {
+            background: #8b4513;
+            color: #faf8f5;
+        }
+
+        /* Sections */
+        .section {
+            padding: 120px 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.2rem;
+            font-weight: 600;
+            margin-bottom: 60px;
+            text-align: center;
+            color: #2c2c2c;
+            letter-spacing: 1px;
+            position: relative;
+        }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 2px;
+            background: #8b4513;
+        }
+
+        /* Repertoire Section */
+        .repertoire-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .repertoire-card {
+            background: #ffffff;
+            border: 1px solid rgba(139, 69, 19, 0.1);
+            padding: 40px;
+            transition: all 0.4s ease;
+            position: relative;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .repertoire-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            border-color: rgba(139, 69, 19, 0.2);
+        }
+
+        .repertoire-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #8b4513;
+        }
+
+        .repertoire-card .composer {
+            font-size: 1.1rem;
+            color: #2c2c2c;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .repertoire-card p {
+            color: #5a5a5a;
+            margin-bottom: 25px;
+        }
+
+        .play-btn {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #8b4513;
+            background: transparent;
+            color: #8b4513;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .play-btn:hover {
+            background: #8b4513;
+            color: #ffffff;
+            transform: scale(1.05);
+        }
+
+        /* About Section */
+        .about {
+            background: #ffffff;
+            margin: 0 -50px;
+            padding: 120px 50px;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .about-text p {
+            margin-bottom: 25px;
+            color: #2c2c2c;
+        }
+
+        .about-text .highlight {
+            color: #8b4513;
+            font-weight: 600;
+        }
+
+        .about-image {
+            width: 100%;
+            height: 500px;
+            background: linear-gradient(135deg, #8b4513 0%, #a0522d 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: #ffffff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M20,50 Q30,30 40,50 T60,50 T80,50" stroke="rgba(255,255,255,0.1)" stroke-width="2" fill="none"/></svg>') repeat;
+            opacity: 0.6;
+        }
+
+        /* Performances Section */
+        .performances {
+            background: #f8f6f2;
+            margin: 0 -50px;
+            padding: 120px 50px;
+        }
+
+        .performance-dates {
+            background: #ffffff;
+            border: 1px solid rgba(139, 69, 19, 0.1);
+            padding: 50px;
+            max-width: 800px;
+            margin: 0 auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .performance-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 0;
+            border-bottom: 1px solid rgba(139, 69, 19, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .performance-item:hover {
+            background: rgba(139, 69, 19, 0.02);
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        .performance-item:last-child {
+            border-bottom: none;
+        }
+
+        .performance-info h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: #8b4513;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .performance-info .venue {
+            font-size: 1.1rem;
+            color: #2c2c2c;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .performance-info .date {
+            color: #5a5a5a;
+            font-style: italic;
+        }
+
+        /* Contact Section */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 50px;
+            border: 1px solid rgba(139, 69, 19, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .form-group {
+            margin-bottom: 30px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #2c2c2c;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid rgba(139, 69, 19, 0.2);
+            background: #faf8f5;
+            color: #2c2c2c;
+            font-size: 1rem;
+            font-family: 'Crimson Text', serif;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #8b4513;
+            background: #ffffff;
+        }
+
+        /* Footer */
+        footer {
+            background: #2c2c2c;
+            color: #faf8f5;
+            padding: 60px 50px;
+            text-align: center;
+            margin-top: 0;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .social-links a {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #8b4513;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #8b4513;
+            text-decoration: none;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            background: transparent;
+        }
+
+        .social-links a:hover {
+            background: #8b4513;
+            color: #faf8f5;
+            transform: translateY(-3px);
+        }
+
+        .footer-text {
+            font-size: 1rem;
+            color: #a0a0a0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .nav-links {
+                gap: 25px;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .performance-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .section {
+                padding: 80px 20px;
+            }
+
+            .about, .performances {
+                margin: 0 -20px;
+                padding: 80px 20px;
+            }
+
+            nav {
+                padding: 20px;
+            }
+
+            .repertoire-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Musical note decorations */
+        .musical-decoration {
+            position: absolute;
+            font-size: 20px;
+            color: rgba(139, 69, 19, 0.1);
+            animation: float 8s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">Anton Boutkov</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#repertoire">Repertoire</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#performances">Performances</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <h1>Anton Boutkov</h1>
+            <div class="subtitle">Classical Violist</div>
+            <p>"Music is the language of the soul, and the viola speaks with the voice of the heart."</p>
+            <div class="cta-buttons">
+                <a href="#repertoire" class="btn btn-primary">Listen</a>
+                <a href="#performances" class="btn btn-secondary">Concerts</a>
+            </div>
+        </div>
+        <div class="musical-decoration" style="top: 20%; left: 10%; animation-delay: 0s;">♪</div>
+        <div class="musical-decoration" style="top: 60%; right: 15%; animation-delay: 2s;">♫</div>
+        <div class="musical-decoration" style="bottom: 30%; left: 20%; animation-delay: 4s;">♪</div>
+    </section>
+
+    <!-- Repertoire Section -->
+    <section id="repertoire" class="section fade-in">
+        <h2>Featured Repertoire</h2>
+        <div class="repertoire-grid">
+            <div class="repertoire-card">
+                <h3>Trauermusik</h3>
+                <div class="composer">Paul Hindemith</div>
+                <p>A deeply moving meditation on mortality and remembrance, composed for viola and strings in a single evening.</p>
+                <button class="play-btn">▶</button>
+            </div>
+            <div class="repertoire-card">
+                <h3>Viola Concerto in G Major, K. 216</h3>
+                <div class="composer">Wolfgang Amadeus Mozart</div>
+                <p>A transcendent interpretation of Mozart's elegant concerto, showcasing the viola's lyrical capabilities in this masterful adaptation.</p>
+                <button class="play-btn">▶</button>
+            </div>
+            <div class="repertoire-card">
+                <h3>Viola Sonata Op. 120 No. 1</h3>
+                <div class="composer">Johannes Brahms</div>
+                <p>Brahms' late masterpiece captures profound emotion and technical brilliance, exploring the full expressive range of the viola.</p>
+                <button class="play-btn">▶</button>
+            </div>
+            <div class="repertoire-card">
+                <h3>Harold in Italy, Op. 16</h3>
+                <div class="composer">Hector Berlioz</div>
+                <p>A symphonic journey featuring the viola as protagonist, telling the story of a wandering poet through the Italian countryside.</p>
+                <button class="play-btn">▶</button>
+            </div>
+            <div class="repertoire-card">
+                <h3>Lachrymae Op. 48a</h3>
+                <div class="composer">Benjamin Britten</div>
+                <p>Reflections on a song of Dowland, weaving Renaissance melancholy through modern harmonies with exceptional artistry.</p>
+                <button class="play-btn">▶</button>
+            </div>
+            <div class="repertoire-card">
+                <h3>Sonata for Viola Alone</h3>
+                <div class="composer">György Ligeti</div>
+                <p>A tour de force of contemporary composition, pushing the boundaries of solo viola technique and expression.</p>
+                <button class="play-btn">▶</button>
+            </div>
+        </div>
+        <audio id="repertoire-audio" src="clip.mp3"></audio>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about fade-in">
+        <div class="about-content">
+            <div class="about-text">
+                <p>Anton Boutkov has established himself as one of the foremost violists of his generation, captivating audiences with his <span class="highlight">profound musicality</span> and technical excellence.</p>
+                
+                <p>A graduate of the <span class="highlight">NYU School of music</span>, Anton has performed with major orchestras including the Springfield Orchestra and the Boston Symphony Orchestra.</p>
+                
+                <p>His interpretations are praised for their <span class="highlight">emotional depth</span> and scholarly insight, bringing fresh perspectives to both classical masterworks and contemporary compositions. Anton's commitment to expanding the viola repertoire has led to numerous collaborations with talented musicians and composers.</p>
+                
+                <p>When not performing, Anton serves on the faculty at the <span class="highlight">UMass school of Music</span> and maintains an deep underground recording collection that he will publish one day.</p>
+            </div>
+            <div class="about-image">
+                <img src="anton_headshot.jpg" alt="Classic Anton">
+            </div>
+        </div>
+    </section>
+
+    <!-- Performances Section -->
+    <section id="performances" class="performances fade-in">
+        <div class="section">
+            <h2>Upcoming Performances</h2>
+            <div class="performance-dates">
+                <div class="performance-item">
+                    <div class="performance-info">
+                        <h4>Brahms Viola Sonatas</h4>
+                        <div class="venue">Carnegie Hall, New York</div>
+                        <div class="date">June 15, 2025 • 8:00 PM</div>
+                    </div>
+                    <a href="#" class="btn btn-secondary">Tickets</a>
+                </div>
+                <div class="performance-item">
+                    <div class="performance-info">
+                        <h4>Mozart Sinfonia Concertante</h4>
+                        <div class="venue">Royal Festival Hall, London</div>
+                        <div class="date">July 2, 2025 • 7:30 PM</div>
+                    </div>
+                    <a href="#" class="btn btn-secondary">Tickets</a>
+                </div>
+                <div class="performance-item">
+                    <div class="performance-info">
+                        <h4>Contemporary Viola Works</h4>
+                        <div class="venue">Musikverein, Vienna</div>
+                        <div class="date">July 18, 2025 • 8:00 PM</div>
+                    </div>
+                    <a href="#" class="btn btn-secondary">Tickets</a>
+                </div>
+                <div class="performance-item">
+                    <div class="performance-info">
+                        <h4>Walton Viola Concerto</h4>
+                        <div class="venue">Boston Symphony Hall</div>
+                        <div class="date">August 5, 2025 • 8:00 PM</div>
+                    </div>
+                    <a href="#" class="btn btn-secondary">Tickets</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section fade-in">
+        <h2>Contact</h2>
+        <form class="contact-form">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <!-- <div class="form-group">
+                <label for="subject">Subject</label>
+                <input type="text" id="subject" name="subject" required>
+            </div> -->
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="6" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Send Message</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="https://www.youtube.com/watch?v=ixrwUTOcTKw" title="YouTube">▶</a>
+                <a href="#" title="Spotify">♪</a>
+                <a href="#" title="Instagram">📷</a>
+                <a href="anton.boutkov@gmail.com" title="Email">✉</a>
+            </div>
+            <p class="footer-text">&copy; 2025 Anton Boutkov. All rights reserved. </p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Play button interactions
+        const audio = document.getElementById('repertoire-audio');
+        let currentBtn = null;
+        document.querySelectorAll('.play-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const isPlaying = this.textContent === '⏸';
+                // If clicking the same button and audio is playing, pause
+                if (isPlaying) {
+                    audio.pause();
+                    audio.currentTime = 0;
+                    this.textContent = '▶';
+                    this.style.background = 'transparent';
+                    this.style.color = '#8b4513';
+                    currentBtn = null;
+                    return;
+                }
+                // Reset all play buttons
+                document.querySelectorAll('.play-btn').forEach(b => {
+                    b.textContent = '▶';
+                    b.style.background = 'transparent';
+                    b.style.color = '#8b4513';
+                });
+                // Play audio
+                audio.currentTime = 0;
+                audio.play();
+                this.textContent = '⏸';
+                this.style.background = '#8b4513';
+                this.style.color = '#ffffff';
+                currentBtn = this;
+            });
+        });
+        // When audio ends, reset play button
+        audio.addEventListener('ended', function() {
+            if (currentBtn) {
+                currentBtn.textContent = '▶';
+                currentBtn.style.background = 'transparent';
+                currentBtn.style.color = '#8b4513';
+                currentBtn = null;
+            }
+        });
+
+        // Form submission
+        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = this.querySelector('#name').value.trim();
+            const email = this.querySelector('#email').value.trim();
+            const message = this.querySelector('#message').value.trim();
+            const inputs = this.querySelectorAll('input, textarea');
+            let isValid = true;
+            
+            inputs.forEach(input => {
+                if (!input.value.trim()) {
+                    isValid = false;
+                    input.style.borderColor = '#d32f2f';
+                } else {
+                    input.style.borderColor = '#8b4513';
+                }
+            });
+            
+            if (isValid) {
+                // Construct mailto link
+                const subject = encodeURIComponent('ATTN Anton: ABvoila request for your availability');
+                const body = encodeURIComponent(
+                    `Name: ${name}\nEmail: ${email}\n\n${message}`
+                );
+                window.location.href = `mailto:anton.boutkov@gmail.com?subject=${subject}&body=${body}`;
+                // Optionally reset form after a short delay
+                setTimeout(() => {
+                    this.reset();
+                    inputs.forEach(input => {
+                        input.style.borderColor = 'rgba(139, 69, 19, 0.2)';
+                    });
+                }, 500);
+            } else {
+                alert('Please complete all required fields.');
+            }
+        });
+
+        // Subtle musical note animations
+        function createMusicalNote() {
+        const notes = ['♪', '♫', '♬', '𝄢', '♯', '𝄞'];
+            const note = document.createElement('div');
+            note.textContent = notes[Math.floor(Math.random() * notes.length)];
+            note.style.cssText = `
+                position: fixed;
+                font-size: 30px;
+                color: rgba(139, 69, 19, 0.1);
+                pointer-events: none;
+                z-index: 1;
+                left: ${Math.random() * window.innerWidth}px;
+                top: ${window.innerHeight}px;
+                animation: floatUp 8s ease-out forwards;
+            `;
+            
+            document.body.appendChild(note);
+            
+            setTimeout(() => {
+                note.remove();
+            }, 8000);
+        }
+
+        // Add floating animation for notes
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes floatUp {
+                0% {
+                    opacity: 0;
+                    transform: translateY(0) rotate(0deg);
+                }
+                10% {
+                    opacity: 20;
+                }
+                50% {
+                    opacity: 50;
+                }
+                90% {
+                    opacity: 20;
+                }
+                100% {
+                    opacity: 0;
+                    transform: translateY(-100vh) rotate(360deg);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Create musical notes occasionally
+        setInterval(createMusicalNote, 2000);
+    </script>
+</body>
+</html>
